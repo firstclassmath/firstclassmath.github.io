@@ -55,8 +55,9 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
 .send.ghost{background:#fff;color:var(--blue);border:1px solid #c9d6e6;font-weight:700}
 .map{padding:0;overflow:hidden}
 .map iframe{display:block;width:100%;height:230px;border:0}
-.map .addr{padding:14px 16px 4px;font-size:15px;line-height:1.5}
+.map .addr{padding:16px 16px 4px;font-size:15px;line-height:1.5}
 .map .addr small{display:block;font-size:12.5px;color:var(--sub);margin-top:4px;font-weight:400}
+.map .naver{display:block;margin:10px 16px 14px;text-align:center;font-size:16px;font-weight:800;color:#fff;background:var(--blue);border-radius:12px;padding:13px 0;text-decoration:none}
 .map .maps{display:flex;gap:6px;padding:10px 16px 16px}
 .map .maps a{flex:1;text-align:center;font-size:13.5px;font-weight:700;color:var(--blue);background:var(--blue2);border-radius:10px;padding:10px 0;text-decoration:none}
 .foot{text-align:center;font-size:11.5px;color:#9a9a96;margin-top:22px;line-height:1.6}
@@ -116,10 +117,10 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
 
   <div class="sec" id="way">오시는 길</div>
   <div class="card map">
-    <iframe src="https://maps.google.com/maps?q=37.60623,126.69680&z=16&output=embed" loading="lazy" title="일등급수학솔루션학원 위치"></iframe>
     <div class="addr"><b>인천 검단구 고산후로 222<br>프리마더타워 5층</b><small>지번: 불로동 1006-14 · 신검단중앙역 인근</small></div>
+    <a class="naver" href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EA%B2%80%EB%8B%A8%EA%B5%AC%20%EA%B3%A0%EC%82%B0%ED%9B%84%EB%A1%9C%20222" target="_blank" rel="noopener">네이버 지도에서 보기 ›</a>
+    <iframe src="https://maps.google.com/maps?q=37.60623,126.69680&z=16&output=embed" loading="lazy" title="일등급수학솔루션학원 위치"></iframe>
     <div class="maps">
-      <a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EA%B2%80%EB%8B%A8%EA%B5%AC%20%EA%B3%A0%EC%82%B0%ED%9B%84%EB%A1%9C%20222" target="_blank" rel="noopener">네이버 지도</a>
       <a href="https://map.kakao.com/link/map/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">카카오맵</a>
       <a href="https://map.kakao.com/link/to/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">길찾기</a>
     </div>
@@ -144,7 +145,7 @@ const LINKS = {
   form: "#apply",  // 상담 신청서 (이 페이지 아래)
   blog: "https://blog.naver.com/firstclassmath_2026",
   insta: "",       // 인스타그램
-  map: "#way",     // 오시는 길 (이 페이지 아래 지도)
+  map: "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EA%B2%80%EB%8B%A8%EA%B5%AC%20%EA%B3%A0%EC%82%B0%ED%9B%84%EB%A1%9C%20222",  // 오시는 길 -> 네이버 지도 (페이지 아래 #way에 지도·주소도 있음)
   addr: "인천 검단구 고산후로 222 프리마더타워 5층"  // 지번: 불로동 1006-14
 };
 
