@@ -45,6 +45,20 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
 .info{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.75}
 .info div{display:flex;gap:12px}
 .info div span:first-child{flex:none;width:56px;color:var(--sub)}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+form.card label{display:block;font-size:13.5px;font-weight:700;margin-bottom:12px}
+form.card label em{font-style:normal;font-weight:500;color:var(--sub)}
+form.card input,form.card select,form.card textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;font-weight:400;padding:11px 12px;border:1px solid #d6d6d2;border-radius:10px;background:#fff;color:var(--ink)}
+form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+.note{font-size:12.5px;line-height:1.6;color:var(--sub);margin:2px 0 12px}
+.send{display:block;width:100%;font:inherit;font-size:16px;font-weight:800;padding:14px;border-radius:12px;border:0;background:var(--blue);color:#fff;cursor:pointer;margin-bottom:8px}
+.send.ghost{background:#fff;color:var(--blue);border:1px solid #c9d6e6;font-weight:700}
+.map{padding:0;overflow:hidden}
+.map iframe{display:block;width:100%;height:230px;border:0}
+.map .addr{padding:14px 16px 4px;font-size:15px;line-height:1.5}
+.map .addr small{display:block;font-size:12.5px;color:var(--sub);margin-top:4px;font-weight:400}
+.map .maps{display:flex;gap:6px;padding:10px 16px 16px}
+.map .maps a{flex:1;text-align:center;font-size:13.5px;font-weight:700;color:var(--blue);background:var(--blue2);border-radius:10px;padding:10px 0;text-decoration:none}
 .foot{text-align:center;font-size:11.5px;color:#9a9a96;margin-top:22px;line-height:1.6}
 </style>
 </head>
@@ -54,14 +68,14 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
     <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="12,86 12,68 37,68 37,48 62,48 62,28 88,28 88,86" fill="#111"/><circle cx="75" cy="15" r="8" fill="#2b4a6f"/></svg>
     <h1>일등급<span>수학솔루션</span></h1>
     <div class="en">FIRST CLASS SOLUTION</div>
-    <div class="tags"><b>신검단중앙역</b><b>초·중·고 수학</b><b>2026. 12 개원</b></div>
+    <div class="tags"><b>신검단중앙역</b><b>초·중·고 수학</b><b>2026. 12. 1 개원</b></div>
   </div>
 
   <div class="sec">전화 상담</div>
   <a class="btn main" id="tel_high"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>
-    <span class="tx"><b>고등부 상담</b><small id="tel_high_no">박강현 선생님</small></span><span class="ar">›</span></a>
+    <span class="tx"><b>고등부 상담</b><small id="tel_high_no"></small></span><span class="ar">›</span></a>
   <a class="btn main" id="tel_mid"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>
-    <span class="tx"><b>초·중등부 상담</b><small id="tel_mid_no">초등·중등 담당</small></span><span class="ar">›</span></a>
+    <span class="tx"><b>초·중등부 상담</b><small id="tel_mid_no"></small></span><span class="ar">›</span></a>
 
   <p class="tip">카카오톡으로 <b>편하신 상담 시간</b>을 남겨 주시면,<br>그 시간에 맞춰 담당 선생님이 자세히 상담해 드립니다.</p>
 
@@ -69,7 +83,7 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
   <a class="btn" id="kakao_chat"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.7 21l3.9-2.6c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg></span>
     <span class="tx"><b>카카오톡 상담</b><small>편하신 상담 시간을 남겨 주세요</small></span><span class="ar">›</span></a>
   <a class="btn" id="form"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>
-    <span class="tx"><b>상담 신청서</b><small>남겨 주시면 먼저 연락드립니다</small></span><span class="ar">›</span></a>
+    <span class="tx"><b>상담 신청서</b><small>작성해 보내 주시면 먼저 연락드립니다</small></span><span class="ar">›</span></a>
   <a class="btn" id="kakao_add"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c0-3.3 3.1-6 7-6s7 2.7 7 6M19 8v6M16 11h6"/></svg></span>
     <span class="tx"><b>카카오톡 채널 추가</b><small>개원 소식·설명회 안내 받기</small></span><span class="ar">›</span></a>
 
@@ -79,42 +93,95 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
   <a class="btn" id="insta"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></span>
     <span class="tx"><b>인스타그램</b><small>학원 일상</small></span><span class="ar">›</span></a>
   <a class="btn" id="map"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
-    <span class="tx"><b>오시는 길</b><small id="addr_short">신검단중앙역 인근</small></span><span class="ar">›</span></a>
+    <span class="tx"><b>오시는 길</b><small id="addr_short">고산후로 222 프리마더타워 5층</small></span><span class="ar">›</span></a>
+
+  <div class="sec" id="apply">상담 신청서</div>
+  <form class="card" id="fm" onsubmit="return false">
+    <label>학생 학년<select id="f_grade">
+      <option value="">선택해 주세요</option>
+      <option>초등 1~3학년</option><option>초등 4학년</option><option>초등 5학년</option><option>초등 6학년</option>
+      <option>중1</option><option>중2</option><option>중3</option>
+      <option>고1</option><option>고2</option><option>고3</option></select></label>
+    <label>학교 <em>(선택)</em><input id="f_school" placeholder="예: 원당중"></label>
+    <label>관심 수업 <em>(선택)</em><select id="f_class">
+      <option value="">정하지 않음</option><option>정규반</option><option>겨울방학 특강</option><option>진단평가</option></select></label>
+    <label>연락받을 번호<input id="f_phone" type="tel" inputmode="tel" placeholder="010-0000-0000"></label>
+    <label>연락 편한 시간 <em>(선택)</em><input id="f_time" placeholder="예: 평일 오후 7시 이후"></label>
+    <label>남기실 말씀 <em>(선택)</em><textarea id="f_msg" rows="3" placeholder="최근 성적, 고민되는 부분 등"></textarea></label>
+    <p class="note">보내기를 누르면 휴대폰 문자 앱이 내용이 채워진 채로 열립니다. 학년에 맞는 담당 번호(고등부 / 초·중등부)로 보내지며, 이 페이지에는 아무것도 저장되지 않습니다.</p>
+    <button type="button" class="send" id="f_sms">문자로 보내기</button>
+    <button type="button" class="send ghost" id="f_kakao">카카오톡으로 보내기</button>
+    <p class="note" id="f_msgbox" hidden></p>
+  </form>
+
+  <div class="sec" id="way">오시는 길</div>
+  <div class="card map">
+    <iframe src="https://maps.google.com/maps?q=37.60623,126.69680&z=16&output=embed" loading="lazy" title="일등급수학솔루션학원 위치"></iframe>
+    <div class="addr"><b>인천 검단구 고산후로 222<br>프리마더타워 5층</b><small>지번: 불로동 1006-14 · 신검단중앙역 인근</small></div>
+    <div class="maps">
+      <a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EA%B2%80%EB%8B%A8%EA%B5%AC%20%EA%B3%A0%EC%82%B0%ED%9B%84%EB%A1%9C%20222" target="_blank" rel="noopener">네이버 지도</a>
+      <a href="https://map.kakao.com/link/map/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">카카오맵</a>
+      <a href="https://map.kakao.com/link/to/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">길찾기</a>
+    </div>
+  </div>
 
   <div class="sec">안내</div>
   <div class="info">
     <div><span>위치</span><span id="addr">신검단중앙역 인근 (상세 주소 추후 안내)</span></div>
     <div><span>대상</span><span>초·중·고 수학 (고등부 중심)</span></div>
-    <div><span>개원</span><span>2026년 12월</span></div>
+    <div><span>개원</span><span>2026년 12월 1일 (화)</span></div>
   </div>
 
-  <p class="foot">일등급수학솔루션 · First Class Solution<br>인천 검단구</p>
+  <p class="foot">일등급수학솔루션학원 · First Class Solution<br>인천 검단구 고산후로 222 프리마더타워 5층</p>
 </div>
 <script>
 // 링크는 여기만 고치면 된다. 비워 두면 버튼이 '준비 중'으로 흐리게 표시된다.
 const LINKS = {
-  tel_high: "010-6604-5644",  // 고등부 (박강현)
+  tel_high: "010-6604-5644",  // 고등부
   tel_mid: "010-4189-5644",   // 초·중등부
   kakao_chat: "https://pf.kakao.com/_FhcWX/chat",  // 카카오톡 채널 1:1 채팅
   kakao_add: "https://pf.kakao.com/_FhcWX",        // 카카오톡 채널 홈(친구 추가)
-  form: "",        // 상담 신청서 (네이버 폼·구글 폼)
+  form: "#apply",  // 상담 신청서 (이 페이지 아래)
   blog: "https://blog.naver.com/firstclassmath_2026",
   insta: "",       // 인스타그램
-  map: "",         // 네이버 지도 장소 링크
-  addr: ""         // 상세 주소 (채우면 안내 칸에 표시)
+  map: "#way",     // 오시는 길 (이 페이지 아래 지도)
+  addr: "인천 검단구 고산후로 222 프리마더타워 5층"  // 지번: 불로동 1006-14
 };
 
 for (const id of ["tel_high", "tel_mid"]) {
   const el = document.getElementById(id), no = LINKS[id];
-  if (no) { el.href = "tel:" + no.replace(/[^0-9+]/g, ""); document.getElementById(id + "_no").textContent += " · " + no; }
+  if (no) { el.href = "tel:" + no.replace(/[^0-9+]/g, ""); document.getElementById(id + "_no").textContent = no; }
   else el.classList.add("off");
 }
 for (const id of ["kakao_chat", "kakao_add", "form", "blog", "insta", "map"]) {
   const el = document.getElementById(id);
-  if (LINKS[id]) { el.href = LINKS[id]; el.target = "_blank"; el.rel = "noopener"; }
+  if (LINKS[id]) { el.href = LINKS[id]; if (!LINKS[id].startsWith("#")) { el.target = "_blank"; el.rel = "noopener"; } }
   else el.classList.add("off");
 }
-if (LINKS.addr) { document.getElementById("addr").textContent = LINKS.addr; document.getElementById("addr_short").textContent = LINKS.addr; }
+if (LINKS.addr) document.getElementById("addr").textContent = LINKS.addr;
+
+// 상담 신청서: 서버 없이 문자/카톡으로 전달
+function formText() {
+  const v = id => document.getElementById(id).value.trim();
+  if (!v("f_grade") || !v("f_phone")) { alert("학생 학년과 연락받을 번호를 적어 주세요."); return null; }
+  return ["[일등급수학솔루션 상담 신청]", "학년: " + v("f_grade"), v("f_school") && "학교: " + v("f_school"),
+    v("f_class") && "관심 수업: " + v("f_class"), "연락처: " + v("f_phone"), v("f_time") && "편한 시간: " + v("f_time"),
+    v("f_msg") && "말씀: " + v("f_msg")].filter(Boolean).join("\n");
+}
+document.getElementById("f_sms").onclick = () => {
+  const t = formText(); if (!t) return;
+  const high = document.getElementById("f_grade").value.startsWith("고");
+  const no = (high ? LINKS.tel_high : LINKS.tel_mid).replace(/[^0-9]/g, "");
+  location.href = "sms:" + no + "?&body=" + encodeURIComponent(t);
+};
+document.getElementById("f_kakao").onclick = async () => {
+  const t = formText(); if (!t) return;
+  const box = document.getElementById("f_msgbox");
+  try { await navigator.clipboard.writeText(t); box.textContent = "신청 내용을 복사했습니다. 열리는 카카오톡 채팅창에 붙여넣어 보내 주세요."; }
+  catch (e) { box.textContent = "아래 내용을 길게 눌러 복사한 뒤 카카오톡 채팅창에 붙여넣어 주세요.\n\n" + t; box.style.whiteSpace = "pre-line"; }
+  box.hidden = false;
+  window.open(LINKS.kakao_chat, "_blank", "noopener");
+};
 </script>
 </body>
 </html>
