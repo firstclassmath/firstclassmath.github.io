@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>일등급수학솔루션 · 오시는 길</title>
+<meta name="description" content="신검단중앙역 일등급수학솔루션. 초·중·고 수학 상담 안내.">
+<meta property="og:title" content="일등급수학솔루션">
+<meta property="og:description" content="신검단중앙역 · 초·중·고 수학 · 상담 안내">
+<meta property="og:image" content="https://firstclassmath.github.io/og.png">
+<meta property="og:url" content="https://firstclassmath.github.io/">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="og.png">
+<style>
+:root{--ink:#111;--sub:#6b6b6b;--line:#e4e4e0;--bg:#fafaf8;--blue:#2b4a6f;--blue2:#e9eef4}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  background-image:linear-gradient(#ececea 1px,transparent 1px),linear-gradient(90deg,#ececea 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:440px;margin:0 auto;padding:36px 18px calc(28px + env(safe-area-inset-bottom))}
+.hero{text-align:center;padding:8px 0 22px}
+.hero svg{width:64px;height:64px}
+.hero h1{font-size:27px;font-weight:900;letter-spacing:-.02em;margin-top:12px}
+.hero h1 span{font-weight:500}
+.hero .en{font-size:10px;letter-spacing:.32em;color:var(--sub);margin-top:5px;font-weight:600}
+.hero .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}
+.hero .tags b{font-size:12.5px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 11px}
+.sec{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.08em;margin:22px 4px 8px}
+.btn{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:9px;
+  text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:transform .08s}
+.btn:active{transform:scale(.985)}
+.btn .ic{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--blue2);color:var(--blue)}
+.btn .ic svg{width:21px;height:21px}
+.btn .tx{flex:1;min-width:0}
+.btn .tx b{display:block;font-size:16px;font-weight:800}
+.btn .tx small{display:block;font-size:13px;color:var(--sub);margin-top:2px}
+.btn .ar{color:#b5b5b0;font-size:20px}
+.btn.main{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.main .ic{background:rgba(255,255,255,.14);color:#fff}
+.btn.main .tx small{color:#c9d6e6}
+.btn.main .ar{color:#c9d6e6}
+.btn.off{opacity:.45;pointer-events:none}
+.btn.off .tx small::after{content:" · 준비 중"}
+.tip{font-size:13.5px;line-height:1.65;color:#444;background:#fff;border:1px dashed #c9d6e6;border-radius:12px;padding:12px 14px;margin:4px 0 0}
+.tip b{color:var(--blue)}
+.info{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.75}
+.info div{display:flex;gap:12px}
+.info div span:first-child{flex:none;width:56px;color:var(--sub)}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+form.card label{display:block;font-size:13.5px;font-weight:700;margin-bottom:12px}
+form.card label em{font-style:normal;font-weight:500;color:var(--sub)}
+form.card input,form.card select,form.card textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;font-weight:400;padding:11px 12px;border:1px solid #d6d6d2;border-radius:10px;background:#fff;color:var(--ink)}
+form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+.note{font-size:12.5px;line-height:1.6;color:var(--sub);margin:2px 0 12px}
+.send{display:block;width:100%;font:inherit;font-size:16px;font-weight:800;padding:14px;border-radius:12px;border:0;background:var(--blue);color:#fff;cursor:pointer;margin-bottom:8px}
+.send.ghost{background:#fff;color:var(--blue);border:1px solid #c9d6e6;font-weight:700}
+.map{padding:0;overflow:hidden}
+.map iframe{display:block;width:100%;height:320px;border:0}
+.map .addr{padding:14px 16px 4px;font-size:15px;line-height:1.5}
+.map .addr small{display:block;font-size:12.5px;color:var(--sub);margin-top:4px;font-weight:400}
+.map .maps{display:flex;gap:6px;padding:10px 16px 16px}
+.map .maps a{flex:1;text-align:center;font-size:13.5px;font-weight:700;color:var(--blue);background:var(--blue2);border-radius:10px;padding:10px 0;text-decoration:none}
+.back{display:inline-block;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none;padding:4px 2px}
+.mini{display:flex;align-items:center;gap:8px;margin:14px 2px 4px}.mini svg{width:28px;height:28px}.mini b{font-size:19px;font-weight:900}.mini b span{font-weight:500}
+.foot{text-align:center;font-size:11.5px;color:#9a9a96;margin-top:22px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">‹ 처음으로</a>
+  <div class="mini"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="12,86 12,68 37,68 37,48 62,48 62,28 88,28 88,86" fill="#111"/><circle cx="75" cy="15" r="8" fill="#2b4a6f"/></svg><b>일등급<span>수학솔루션</span></b></div>
+
+  <div class="sec" id="way">오시는 길</div>
+  <div class="card map">
+    <iframe src="https://maps.google.com/maps?q=37.60623,126.69680&z=16&output=embed" title="일등급수학솔루션학원 위치"></iframe>
+    <div class="addr"><b>인천 검단구 고산후로 222<br>프리마더타워 5층</b><small>지번: 불로동 1006-14 · 신검단중앙역 인근</small></div>
+    <div class="maps">
+      <a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EA%B2%80%EB%8B%A8%EA%B5%AC%20%EA%B3%A0%EC%82%B0%ED%9B%84%EB%A1%9C%20222" target="_blank" rel="noopener">네이버 지도</a>
+      <a href="https://map.kakao.com/link/map/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">카카오맵</a>
+      <a href="https://map.kakao.com/link/to/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">길찾기</a>
+    </div>
+  </div>
+
+  <p class="foot">일등급수학솔루션학원 · First Class Solution<br>인천 검단구 고산후로 222 프리마더타워 5층</p>
+</div>
+</body>
+</html>

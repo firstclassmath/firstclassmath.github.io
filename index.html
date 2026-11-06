@@ -95,36 +95,6 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
   <a class="btn" id="map"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
     <span class="tx"><b>오시는 길</b><small id="addr_short">고산후로 222 프리마더타워 5층</small></span><span class="ar">›</span></a>
 
-  <div class="sec" id="apply">상담 신청서</div>
-  <form class="card" id="fm" onsubmit="return false">
-    <label>학생 학년<select id="f_grade">
-      <option value="">선택해 주세요</option>
-      <option>초등 1~3학년</option><option>초등 4학년</option><option>초등 5학년</option><option>초등 6학년</option>
-      <option>중1</option><option>중2</option><option>중3</option>
-      <option>고1</option><option>고2</option><option>고3</option></select></label>
-    <label>학교 <em>(선택)</em><input id="f_school" placeholder="예: 원당중"></label>
-    <label>관심 수업 <em>(선택)</em><select id="f_class">
-      <option value="">정하지 않음</option><option>정규반</option><option>겨울방학 특강</option><option>진단평가</option></select></label>
-    <label>연락받을 번호<input id="f_phone" type="tel" inputmode="tel" placeholder="010-0000-0000"></label>
-    <label>연락 편한 시간 <em>(선택)</em><input id="f_time" placeholder="예: 평일 오후 7시 이후"></label>
-    <label>남기실 말씀 <em>(선택)</em><textarea id="f_msg" rows="3" placeholder="최근 성적, 고민되는 부분 등"></textarea></label>
-    <p class="note">보내기를 누르면 휴대폰 문자 앱이 내용이 채워진 채로 열립니다. 학년에 맞는 담당 번호(고등부 / 초·중등부)로 보내지며, 이 페이지에는 아무것도 저장되지 않습니다.</p>
-    <button type="button" class="send" id="f_sms">문자로 보내기</button>
-    <button type="button" class="send ghost" id="f_kakao">카카오톡으로 보내기</button>
-    <p class="note" id="f_msgbox" hidden></p>
-  </form>
-
-  <div class="sec" id="way">오시는 길</div>
-  <div class="card map">
-    <iframe src="https://maps.google.com/maps?q=37.60623,126.69680&z=16&output=embed" loading="lazy" title="일등급수학솔루션학원 위치"></iframe>
-    <div class="addr"><b>인천 검단구 고산후로 222<br>프리마더타워 5층</b><small>지번: 불로동 1006-14 · 신검단중앙역 인근</small></div>
-    <div class="maps">
-      <a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EA%B2%80%EB%8B%A8%EA%B5%AC%20%EA%B3%A0%EC%82%B0%ED%9B%84%EB%A1%9C%20222" target="_blank" rel="noopener">네이버 지도</a>
-      <a href="https://map.kakao.com/link/map/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">카카오맵</a>
-      <a href="https://map.kakao.com/link/to/%EC%9D%BC%EB%93%B1%EA%B8%89%EC%88%98%ED%95%99%EC%86%94%EB%A3%A8%EC%85%98%ED%95%99%EC%9B%90,37.60623,126.69680" target="_blank" rel="noopener">길찾기</a>
-    </div>
-  </div>
-
   <div class="sec">안내</div>
   <div class="info">
     <div><span>위치</span><span id="addr">신검단중앙역 인근 (상세 주소 추후 안내)</span></div>
@@ -141,10 +111,10 @@ const LINKS = {
   tel_mid: "010-4189-5644",   // 초·중등부
   kakao_chat: "https://pf.kakao.com/_FhcWX/chat",  // 카카오톡 채널 1:1 채팅
   kakao_add: "https://pf.kakao.com/_FhcWX",        // 카카오톡 채널 홈(친구 추가)
-  form: "#apply",  // 상담 신청서 (이 페이지 아래)
+  form: "apply.html",  // 상담 신청서 화면
   blog: "https://blog.naver.com/firstclassmath_2026",
   insta: "",       // 인스타그램
-  map: "#way",     // 오시는 길 (이 페이지 아래 지도)
+  map: "way.html",  // 오시는 길 화면 (지도)
   addr: "인천 검단구 고산후로 222 프리마더타워 5층"  // 지번: 불로동 1006-14
 };
 
@@ -155,33 +125,10 @@ for (const id of ["tel_high", "tel_mid"]) {
 }
 for (const id of ["kakao_chat", "kakao_add", "form", "blog", "insta", "map"]) {
   const el = document.getElementById(id);
-  if (LINKS[id]) { el.href = LINKS[id]; if (!LINKS[id].startsWith("#")) { el.target = "_blank"; el.rel = "noopener"; } }
+  if (LINKS[id]) { el.href = LINKS[id]; if (/^https?:/.test(LINKS[id])) { el.target = "_blank"; el.rel = "noopener"; } }
   else el.classList.add("off");
 }
 if (LINKS.addr) document.getElementById("addr").textContent = LINKS.addr;
-
-// 상담 신청서: 서버 없이 문자/카톡으로 전달
-function formText() {
-  const v = id => document.getElementById(id).value.trim();
-  if (!v("f_grade") || !v("f_phone")) { alert("학생 학년과 연락받을 번호를 적어 주세요."); return null; }
-  return ["[일등급수학솔루션 상담 신청]", "학년: " + v("f_grade"), v("f_school") && "학교: " + v("f_school"),
-    v("f_class") && "관심 수업: " + v("f_class"), "연락처: " + v("f_phone"), v("f_time") && "편한 시간: " + v("f_time"),
-    v("f_msg") && "말씀: " + v("f_msg")].filter(Boolean).join("\n");
-}
-document.getElementById("f_sms").onclick = () => {
-  const t = formText(); if (!t) return;
-  const high = document.getElementById("f_grade").value.startsWith("고");
-  const no = (high ? LINKS.tel_high : LINKS.tel_mid).replace(/[^0-9]/g, "");
-  location.href = "sms:" + no + "?&body=" + encodeURIComponent(t);
-};
-document.getElementById("f_kakao").onclick = async () => {
-  const t = formText(); if (!t) return;
-  const box = document.getElementById("f_msgbox");
-  try { await navigator.clipboard.writeText(t); box.textContent = "신청 내용을 복사했습니다. 열리는 카카오톡 채팅창에 붙여넣어 보내 주세요."; }
-  catch (e) { box.textContent = "아래 내용을 길게 눌러 복사한 뒤 카카오톡 채팅창에 붙여넣어 주세요.\n\n" + t; box.style.whiteSpace = "pre-line"; }
-  box.hidden = false;
-  window.open(LINKS.kakao_chat, "_blank", "noopener");
-};
 </script>
 </body>
 </html>
