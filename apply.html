@@ -82,7 +82,7 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
     <label>연락받을 번호<input id="f_phone" type="tel" inputmode="tel" placeholder="010-0000-0000"></label>
     <label>연락 편한 시간 <em>(선택)</em><input id="f_time" placeholder="예: 평일 오후 7시 이후"></label>
     <label>남기실 말씀 <em>(선택)</em><textarea id="f_msg" rows="3" placeholder="최근 성적, 고민되는 부분 등"></textarea></label>
-    <p class="note">보내기를 누르면 휴대폰 문자 앱이 내용이 채워진 채로 열립니다. 학년에 맞는 담당 번호(고등부 / 초·중등부)로 보내지며, 이 페이지에는 아무것도 저장되지 않습니다.</p>
+    <p class="note">보내기를 누르면 휴대폰 문자 앱이 내용이 채워진 채로 열립니다. 원장 상담 번호(010-4305-5644)로 보내지며, 이 페이지에는 아무것도 저장되지 않습니다.</p>
     <button type="button" class="send" id="f_sms">문자로 보내기</button>
     <button type="button" class="send ghost" id="f_kakao">카카오톡으로 보내기</button>
     <p class="note" id="f_msgbox" hidden></p>
@@ -93,8 +93,8 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
 <script>
 // 번호를 바꾸면 index.html의 LINKS도 같이 바꿉니다.
 const LINKS = {
-  tel_high: "010-6604-5644",  // 고등부
-  tel_mid: "010-4189-5644",   // 초·중등부
+  tel_high: "010-4305-5644",  // 원장 상담
+  tel_mid: "010-4305-5644",   // 초·중등부
   kakao_chat: "https://pf.kakao.com/_FhcWX/chat"
 };
 // 상담 신청서: 서버 없이 문자/카톡으로 전달
