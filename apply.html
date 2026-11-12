@@ -82,10 +82,10 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
     <label>연락받을 번호<input id="f_phone" type="tel" inputmode="tel" placeholder="010-0000-0000"></label>
     <label>연락 편한 시간 <em>(선택)</em><input id="f_time" placeholder="예: 평일 오후 7시 이후"></label>
     <label>남기실 말씀 <em>(선택)</em><textarea id="f_msg" rows="3" placeholder="최근 성적, 고민되는 부분 등"></textarea></label>
-    <p class="note">보내기를 누르면 휴대폰 문자 앱이 내용이 채워진 채로 열립니다. 원장 상담 번호(010-4305-5644)로 보내지며, 이 페이지에는 아무것도 저장되지 않습니다.</p>
+    <p class="note">문자로 보내기: 휴대폰 문자 앱이 내용이 채워진 채로 열려 원장 상담 번호(010-4305-5644)로 보내집니다. 카카오톡으로 보내기: 내용이 복사되니 채팅창에 붙여넣어 보내 주세요. 이 페이지에는 아무것도 저장되지 않습니다.</p>
     <button type="button" class="send" id="f_sms">문자로 보내기</button>
     <button type="button" class="send ghost" id="f_kakao">카카오톡으로 보내기</button>
-    <p class="note" id="f_msgbox" hidden></p>
+    <div class="note" id="f_msgbox" hidden></div>
   </form>
 
   <p class="foot">일등급수학솔루션학원 · First Class Solution<br>인천 검단구 고산후로 222 프리마더타워 5층</p>
@@ -105,19 +105,53 @@ function formText() {
     v("f_class") && "관심 수업: " + v("f_class"), "연락처: " + v("f_phone"), v("f_time") && "편한 시간: " + v("f_time"),
     v("f_msg") && "말씀: " + v("f_msg")].filter(Boolean).join("\n");
 }
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+// 클릭 직후 동기로 복사(인앱 브라우저·구형 폰 대비 execCommand 먼저)
+function copyText(t) {
+  let ok = false;
+  const ta = document.createElement("textarea");
+  ta.value = t; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:0;opacity:0";
+  document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, t.length);
+  try { ok = document.execCommand("copy"); } catch (e) {}
+  ta.remove();
+  if (navigator.clipboard) navigator.clipboard.writeText(t).catch(() => {});
+  return ok;
+}
+// 안내 상자: 신청 내용 + 다시 복사 + 다음 단계 버튼(사용자가 직접 눌러 팝업 차단 없음)
+function showBox(head, t, nextLabel, nextHref) {
+  const box = document.getElementById("f_msgbox");
+  box.innerHTML = "";
+  const h = document.createElement("b"); h.textContent = head; box.appendChild(h);
+  const pre = document.createElement("textarea"); pre.readOnly = true; pre.rows = 7; pre.value = t;
+  pre.style.marginBottom = "8px"; box.appendChild(pre);
+  const again = document.createElement("button"); again.type = "button"; again.className = "send ghost"; again.textContent = "내용 다시 복사";
+  again.onclick = () => { pre.select(); copyText(t); again.textContent = "복사했어요"; };
+  box.appendChild(again);
+  if (nextHref) {
+    const a = document.createElement("a"); a.className = "send"; a.href = nextHref; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = nextLabel; a.style.cssText = "text-align:center;text-decoration:none";
+    box.appendChild(a);
+  }
+  box.hidden = false;
+  box.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 document.getElementById("f_sms").onclick = () => {
   const t = formText(); if (!t) return;
   const high = document.getElementById("f_grade").value.startsWith("고");
-  const no = (high ? LINKS.tel_high : LINKS.tel_mid).replace(/[^0-9]/g, "");
-  location.href = "sms:" + no + "?&body=" + encodeURIComponent(t);
+  const tel = high ? LINKS.tel_high : LINKS.tel_mid;
+  if (!isMobile) {  // PC에는 문자 앱이 없음
+    copyText(t);
+    showBox("PC에서는 문자 앱이 열리지 않아요. 아래 내용을 휴대폰 문자로 " + tel + "에 보내 주시거나, 카카오톡으로 보내기를 눌러 주세요.", t);
+    return;
+  }
+  location.href = "sms:" + tel.replace(/[^0-9]/g, "") + "?&body=" + encodeURIComponent(t);
 };
-document.getElementById("f_kakao").onclick = async () => {
+document.getElementById("f_kakao").onclick = () => {
   const t = formText(); if (!t) return;
-  const box = document.getElementById("f_msgbox");
-  try { await navigator.clipboard.writeText(t); box.textContent = "신청 내용을 복사했습니다. 열리는 카카오톡 채팅창에 붙여넣어 보내 주세요."; }
-  catch (e) { box.textContent = "아래 내용을 길게 눌러 복사한 뒤 카카오톡 채팅창에 붙여넣어 주세요.\n\n" + t; box.style.whiteSpace = "pre-line"; }
-  box.hidden = false;
-  window.open(LINKS.kakao_chat, "_blank", "noopener");
+  const ok = copyText(t);
+  showBox((ok ? "① 신청 내용을 복사했어요. " : "① 아래 내용을 길게 눌러 복사해 주세요. ")
+    + "② 아래 버튼으로 카카오톡 채팅을 열고, 입력창에 붙여넣기 해서 보내 주세요.", t,
+    "카카오톡 채팅 열기", LINKS.kakao_chat);
 };
 </script>
 </body>
