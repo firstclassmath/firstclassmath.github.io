@@ -98,8 +98,9 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
 .bk .meta{margin:15px 0 0;padding:13px 0 0;border-top:1px solid rgba(255,255,255,.16)}
 .bk .meta .r{display:flex;gap:10px;font-size:14.5px;color:#e8eef6;line-height:1.5;margin:5px 0;word-break:keep-all}
 .bk .meta i{font-style:normal;flex:none;width:30px;font-size:12.5px;font-weight:800;color:#9fb6d3;padding-top:2px}
-.bk .go{display:flex;align-items:center;justify-content:space-between;margin-top:16px;background:#fff;color:var(--blue);border-radius:12px;padding:14px 16px;font-size:16.5px;font-weight:900}
-.bk .go span{font-size:13.5px;font-weight:700;color:#6d86a6}
+.bk .go{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;background:#fff;color:var(--blue);border-radius:12px;padding:14px 16px;font-size:16.5px;font-weight:900}
+.bk .go span{font-size:16.5px;font-weight:900;color:var(--blue)}
+.bk .go span.hot,.bk .go span.end{font-size:13px}
 .bk .go span.hot{color:#fff;background:#d9541e;border-radius:999px;padding:3px 10px;font-weight:900}
 .bk .go span.end{color:#fff;background:#9a9a96;border-radius:999px;padding:3px 10px;font-weight:900}
 .hit .sub{word-break:keep-all}
@@ -124,7 +125,7 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
       <div class="r"><i>진행</i>연세대·대치동 출신 강사들이 직접 1:1로</div>
       <div class="r"><i>시간</i>오전 10시 ~ 오후 2시 · 1인 30분</div>
     </div>
-    <div class="go">예약하러 가기 <span id="bk_st">30분 단위 ›</span></div>
+    <div class="go">예약하러 가기 <span id="bk_st">›</span></div>
   </a>
 
   <!-- 적중 예고(손으로 관리). 11/22 공개 글이 나오면 링크를 공개 글로 바꿀 것 -->
@@ -139,7 +140,7 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
   fetch("https://script.google.com/macros/s/AKfycbxb1c5Ley4LgloAW98MVHugVrq3D3EokX5Ts9Hev8R2AlPlKKrcTYH8N0zZF_83P_x7/exec").then(r=>r.json()).then(s=>{
     try{localStorage.setItem("bk_status",JSON.stringify({t:Date.now(),cap:s.cap,counts:s.counts}))}catch(e){}
     var v=Object.values(s.counts||{}),tot=v.length*s.cap,n=v.reduce((a,c)=>a+Math.min(c,s.cap),0),e=document.getElementById("bk_st");
-    if(!tot)return; if(n>=tot){e.textContent="예약 마감";e.className="end";} else if(n*2>=tot){e.textContent="마감임박 ›";e.className="hot";}
+    if(!tot)return; if(n>=tot){e.textContent="예약 마감";e.className="end";} else if(n*2>=tot){e.textContent="마감임박";e.className="hot";}
   }).catch(()=>{});</script>
   <script>(function(){var d=Math.ceil((new Date(2026,10,22)-new Date().setHours(0,0,0,0))/864e5),e=document.getElementById("hit_dd");
     if(d>0)e.textContent="D-"+d+" · 11/22(일)";else if(d===0)e.textContent="오늘 공개!";else e.textContent="공개 중";})()</script>
