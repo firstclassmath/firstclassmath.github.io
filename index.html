@@ -126,6 +126,7 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
   </div>
   <script>// 11/28 예약 현황: 절반 이상 차면 '마감임박', 다 차면 '예약 마감' (주소는 booking/index.html의 API와 같음)
   fetch("https://script.google.com/macros/s/AKfycbxb1c5Ley4LgloAW98MVHugVrq3D3EokX5Ts9Hev8R2AlPlKKrcTYH8N0zZF_83P_x7/exec").then(r=>r.json()).then(s=>{
+    try{localStorage.setItem("bk_status",JSON.stringify({t:Date.now(),cap:s.cap,counts:s.counts}))}catch(e){}
     var v=Object.values(s.counts||{}),tot=v.length*s.cap,n=v.reduce((a,c)=>a+Math.min(c,s.cap),0),e=document.getElementById("bk_st");
     if(!tot)return; if(n>=tot){e.textContent="예약 마감";e.className="end";} else if(n*2>=tot){e.textContent="마감임박 ›";e.className="hot";}
   }).catch(()=>{});</script>
