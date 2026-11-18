@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>11/28(토) 1:1 진단·학습 컨설팅 예약 · 일등급수학솔루션</title>
+<meta name="description" content="11월 28일(토) 중1~고3 1:1 진단테스트·학습 컨설팅 선착순 예약">
+<meta property="og:title" content="11/28(토) 중1~고3 1:1 진단·학습 컨설팅 선착순 예약">
+<meta property="og:description" content="대치동 출신 강사들이 직접 1:1 진단테스트와 학습 컨설팅을 진행합니다.">
+<meta property="og:image" content="https://firstclassmath.github.io/og.png">
+<meta property="og:url" content="https://firstclassmath.github.io/booking/">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="../og.png">
+<style>
+:root{--ink:#111;--sub:#6b6b6b;--line:#e4e4e0;--bg:#fafaf8;--blue:#2b4a6f;--blue2:#e9eef4}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  background-image:linear-gradient(#ececea 1px,transparent 1px),linear-gradient(90deg,#ececea 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:440px;margin:0 auto;padding:22px 18px calc(28px + env(safe-area-inset-bottom))}
+.back{display:inline-block;font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none;margin-bottom:14px}
+.top{background:var(--blue);color:#fff;border-radius:16px;padding:18px 18px 16px}
+.top .badge{display:inline-block;font-size:12px;font-weight:900;background:#d9541e;color:#fff;border-radius:999px;padding:3px 10px}
+.top h1{font-size:22px;font-weight:900;letter-spacing:-.02em;line-height:1.35;margin-top:10px}
+.top p{word-break:keep-all;font-size:14px;line-height:1.6;color:#dce5f0;margin-top:8px}
+.top .who{display:inline-block;font-size:12.5px;font-weight:700;background:rgba(255,255,255,.14);border-radius:8px;padding:3px 8px;margin-top:10px}
+.sec{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.08em;margin:22px 4px 8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.info{font-size:14px;line-height:1.75}
+.info div{display:flex;gap:12px}
+.info div span:first-child{flex:none;width:44px;color:var(--sub)}
+.day{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.day b{font-size:16px;font-weight:900}
+.day small{font-size:12px;color:var(--sub)}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.slot{font:inherit;border:1.5px solid #c9d6e6;background:#fff;color:var(--blue);border-radius:10px;padding:10px 0 8px;cursor:pointer;text-align:center;line-height:1.2}
+.slot b{display:block;font-size:16px;font-weight:800}
+.slot small{display:block;font-size:11.5px;font-weight:600;color:#6d86a6;margin-top:3px}
+.slot.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.slot.on small{color:#c9d6e6}
+.slot:disabled{background:#f1f1ef;border-color:#e4e4e0;color:#b0b0ab;cursor:default}
+.slot:disabled small{color:#c94a2a}
+.slot.wait small{color:#b0b0ab}
+.msg{font-size:12.5px;color:var(--sub);margin-top:10px;line-height:1.5}
+.msg.err{color:#c94a2a;font-weight:700}
+form label.f{display:block;font-size:13.5px;font-weight:700;margin-bottom:12px}
+form label.f em{font-style:normal;font-weight:500;color:var(--sub)}
+form input[type=text],form input[type=tel],form textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;font-weight:400;padding:11px 12px;border:1px solid #d6d6d2;border-radius:10px;background:#fff;color:var(--ink)}
+form input:focus,form textarea:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+.agree{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.55;color:#444;background:#f6f8fb;border:1px solid #dfe5ee;border-radius:10px;padding:11px 12px;margin:4px 0 14px;cursor:pointer}
+.agree input{flex:none;width:18px;height:18px;margin-top:1px;accent-color:var(--blue)}
+.picked{font-size:14px;font-weight:700;color:var(--blue);background:var(--blue2);border-radius:10px;padding:10px 12px;margin-bottom:14px}
+.send{display:block;width:100%;font:inherit;font-size:16px;font-weight:800;padding:14px;border-radius:12px;border:0;background:var(--blue);color:#fff;cursor:pointer}
+.send:disabled{background:#9fb0c4;cursor:default}
+.hp{position:absolute;left:-9999px}
+.done{text-align:center;padding:26px 18px;margin-top:14px}
+.done .ok{width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;margin:0 auto 12px;font-size:28px;font-weight:900}
+.done h2{font-size:20px;font-weight:900}
+.done .when{font-size:17px;font-weight:800;color:var(--blue);margin:10px 0 6px}
+.done p{word-break:keep-all;font-size:13.5px;line-height:1.65;color:#444}
+.done .no{display:inline-block;font-size:15px;font-weight:900;letter-spacing:.04em;color:var(--ink);background:#fff7f0;border:1.5px dashed #f0b48a;border-radius:10px;padding:6px 14px;margin:4px 0 12px}
+.done .no small{font-weight:600;color:var(--sub);margin-right:6px;letter-spacing:0}
+.kk{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font-size:15px;font-weight:800;text-decoration:none;border-radius:12px;padding:13px;margin-top:9px;background:#fee500;color:#191919}
+.kk svg{width:20px;height:20px}
+.kk.sub{background:#fff;border:1px solid #e3d98a;font-weight:700}
+.done a.home{display:inline-block;margin-top:16px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none;background:var(--blue2);border-radius:10px;padding:10px 16px}
+.foot{text-align:center;font-size:11.5px;color:#9a9a96;margin-top:22px;line-height:1.6}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">‹ 상담 안내로</a>
+
+  <div class="top">
+    <span class="badge">선착순 마감</span>
+    <h1>11월 28일(토)<br>1:1 진단테스트 · 학습 컨설팅 예약</h1>
+    <p>대치동 출신 강사들이 직접 1:1 진단테스트와 학습 컨설팅을 진행합니다.</p>
+    <span class="who">중1 ~ 고3 대상</span>
+  </div>
+
+  <div id="main">
+    <div class="sec">안내</div>
+    <div class="card info">
+      <div><span>일시</span><span>2026년 11월 28일 (토) 오전 10시 ~ 오후 2시</span></div>
+      <div><span>방식</span><span>1회 30분 · 학생 1명씩 1:1 진행</span></div>
+      <!-- 11/28 상담 장소: 학원 주소로 확정 (2026-11-18) -->
+      <div><span>장소</span><span>인천 검단구 고산후로 222 프리마더타워 5층</span></div>
+      <div><span>비용</span><span>무료</span></div>
+    </div>
+
+    <div class="sec">시간 선택</div>
+    <div class="card">
+      <div class="day"><b>11월 28일 (토)</b><small>선착순 · 마감 시 선택 불가</small></div>
+      <div class="slots" id="slots"></div>
+      <p class="msg" id="slotmsg">예약 현황을 불러오는 중입니다…</p>
+    </div>
+
+    <div class="sec">예약자 정보</div>
+    <form class="card" id="fm" novalidate>
+      <div class="picked" id="picked">위에서 시간을 먼저 선택해 주세요</div>
+      <label class="f">학생 이름<input type="text" name="name" maxlength="20" autocomplete="off" required></label>
+      <label class="f">학교 · 학년 <em>(예: 원당중 2학년, 아라고 1학년)</em><input type="text" name="school" maxlength="40" autocomplete="off" required></label>
+      <label class="f">학부모 연락처 <em>(확인 연락을 드리는 번호)</em><input type="tel" name="phone" maxlength="13" placeholder="010-0000-0000" inputmode="numeric" autocomplete="tel" required></label>
+      <label class="f">남기실 말씀 <em>(선택)</em><textarea name="memo" rows="3" maxlength="300" placeholder="현재 성적, 공부 방법 고민, 궁금한 점 등"></textarea></label>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="agree"><input type="checkbox" name="agree"><span>(필수) 입력한 개인정보는 <b>이번 상담 연락에만</b> 사용하며, 상담이 끝나면 삭제합니다.</span></label>
+      <button class="send" id="send" type="submit">예약하기</button>
+      <p class="msg" id="formmsg"></p>
+    </form>
+  </div>
+
+  <div class="card done" id="done" hidden>
+    <div class="ok">✓</div>
+    <h2>예약이 접수되었습니다</h2>
+    <div class="when" id="donewhen"></div>
+    <div class="no"><small>예약번호</small><span id="doneno"></span></div>
+    <p><b>카카오톡 채널을 추가하고 1:1 채팅으로 예약번호를 보내 주세요.</b><br>확인 후 예약 확정 안내를 드립니다.</p>
+    <a class="kk" href="https://pf.kakao.com/_FhcWX/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.7 21l3.9-2.6c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>카톡으로 예약번호 보내기</a>
+    <a class="kk sub" href="https://pf.kakao.com/_FhcWX" target="_blank" rel="noopener">카카오톡 채널 추가</a>
+    <p style="margin-top:14px">일정 변경·취소: <b id="donetel"></b></p>
+    <a class="home" href="../">상담 안내로 돌아가기</a>
+  </div>
+
+  <p class="foot">일등급수학솔루션학원 · First Class Solution<br>인천광역시서부교육지원청 등록 제2746호 · 교습과목 수학<br>인천 검단구 고산후로 222 프리마더타워 5층</p>
+</div>
+<script>
+// Apps Script 웹 앱 주소를 여기에 붙여 넣는다 (booking/설정방법.md 참고). 비어 있으면 예약 버튼이 막힌다.
+const API = "";
+const TEL = "010-4305-5644";  // 원장 상담 번호
+const SLOTS = ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30"];
+const MOCK = new URLSearchParams(location.search).has("mock");  // 로컬 시험용: ?mock
+
+const $ = id => document.getElementById(id);
+const fm = $("fm");
+let cap = 1, counts = {}, pick = "";
+$("donetel").textContent = "원장 상담 " + TEL;
+
+const label = t => { const [h, m] = t.split(":").map(Number); return (h < 12 ? "오전 " : "오후 ") + (h > 12 ? h - 12 : h) + "시" + (m ? " 30분" : ""); };
+
+// ---- 서버 통신 (MOCK이면 메모리에서 흉내) ----
+const mockDB = { cap: 1, counts: { "10:00": 1, "11:30": 1 } };
+async function getStatus() {
+  if (MOCK) return { ok: true, cap: mockDB.cap, counts: { ...mockDB.counts } };
+  const r = await fetch(API + "?t=" + Date.now());
+  return r.json();
+}
+async function book(data) {
+  if (MOCK) {
+    await new Promise(r => setTimeout(r, 400));
+    if ((mockDB.counts[data.slot] || 0) >= mockDB.cap) return { ok: false, code: "full", cap: mockDB.cap, counts: { ...mockDB.counts } };
+    mockDB.counts[data.slot] = (mockDB.counts[data.slot] || 0) + 1;
+    return { ok: true };
+  }
+  // text/plain으로 보내야 브라우저 사전 요청(CORS preflight)이 생기지 않는다
+  const r = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+  return r.json();
+}
+
+// ---- 시간 버튼 ----
+function render() {
+  $("slots").innerHTML = "";
+  for (const t of SLOTS) {
+    const left = cap - (counts[t] || 0), b = document.createElement("button");
+    b.type = "button"; b.className = "slot" + (t === pick ? " on" : "");
+    b.innerHTML = "<b>" + t + "</b><small>" + (left <= 0 ? "마감" : cap > 1 ? "잔여 " + left : "예약 가능") + "</small>";
+    b.disabled = left <= 0;
+    b.onclick = () => { pick = t; render(); };
+    $("slots").appendChild(b);
+  }
+  if (pick && cap - (counts[pick] || 0) <= 0) pick = "";
+  $("picked").textContent = pick ? "선택한 시간: 11월 28일(토) " + label(pick) : "위에서 시간을 먼저 선택해 주세요";
+  const full = SLOTS.every(t => cap - (counts[t] || 0) <= 0);
+  $("slotmsg").textContent = full ? "모든 시간이 마감되었습니다. 다른 날 상담은 원장 상담 " + TEL + "으로 문의해 주세요." : "30분 단위 · 선착순 마감";
+  $("slotmsg").className = "msg" + (full ? " err" : "");
+}
+function waiting(text) {
+  $("slots").innerHTML = SLOTS.map(t => '<button class="slot wait" type="button" disabled><b>' + t + "</b><small>-</small></button>").join("");
+  $("slotmsg").textContent = text;
+}
+async function load() {
+  if (!API && !MOCK) { waiting("온라인 예약 준비 중입니다. 원장 상담 " + TEL + "으로 문의해 주세요."); $("send").disabled = true; return; }
+  waiting("예약 현황을 불러오는 중입니다…");
+  try { const s = await getStatus(); cap = s.cap; counts = s.counts || {}; render(); }
+  catch (e) { waiting("예약 현황을 불러오지 못했습니다. 잠시 후 새로고침하거나 " + TEL + "으로 문의해 주세요."); $("slotmsg").className = "msg err"; }
+}
+
+// ---- 제출 ----
+function err(t) { $("formmsg").textContent = t; $("formmsg").className = "msg err"; }
+fm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(fm));
+  d.name = d.name.trim(); d.school = d.school.trim(); d.memo = (d.memo || "").trim();
+  const digits = d.phone.replace(/\D/g, "");
+  if (!pick) return err("상담 시간을 선택해 주세요.");
+  if (!d.name) return err("학생 이름을 입력해 주세요.");
+  if (!d.school) return err("학교·학년을 입력해 주세요.");
+  if (!/^01\d{8,9}$/.test(digits)) return err("학부모 연락처를 정확히 입력해 주세요. (예: 010-1234-5678)");
+  if (!d.agree) return err("개인정보 이용 안내에 동의해 주세요.");
+  d.phone = digits.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
+  d.slot = pick; delete d.agree;
+  $("send").disabled = true; $("send").textContent = "예약 중…"; $("formmsg").textContent = "";
+  try {
+    const r = await book(d);
+    if (r.ok) {
+      $("donewhen").textContent = "11월 28일(토) " + label(pick) + " · " + d.name;
+      $("doneno").textContent = r.no || "1128-" + pick.replace(":", "");
+      $("main").hidden = true; $("done").hidden = false; scrollTo(0, 0);
+    } else {
+      if (r.counts) { counts = r.counts; cap = r.cap || cap; }
+      if (r.code === "full") { err("방금 다른 분이 " + pick + " 시간을 예약했습니다. 다른 시간을 선택해 주세요."); pick = ""; render(); }
+      else if (r.code === "dup") err("이 연락처로 이미 예약되어 있습니다. 변경은 " + TEL + "으로 연락 주세요.");
+      else err("예약하지 못했습니다. 다시 시도하거나 " + TEL + "으로 연락 주세요.");
+    }
+  } catch (e2) { err("연결이 원활하지 않습니다. 다시 시도하거나 " + TEL + "으로 연락 주세요."); }
+  $("send").disabled = false; $("send").textContent = "예약하기";
+});
+$("fm").phone.addEventListener("input", e => {
+  const v = e.target.value.replace(/\D/g, "").slice(0, 11);
+  e.target.value = v.length < 4 ? v : v.length < 8 ? v.slice(0, 3) + "-" + v.slice(3) : v.slice(0, 3) + "-" + v.slice(3, v.length - 4) + "-" + v.slice(-4);
+});
+load();
+</script>
+</body>
+</html>
