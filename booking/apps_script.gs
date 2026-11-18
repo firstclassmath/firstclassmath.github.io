@@ -12,9 +12,12 @@ const SHEET = '예약';
 const HEAD = ['접수시각', '시간', '학생 이름', '학교·학년', '학부모 연락처', '메모', '예약번호'];
 // 새 예약 알림 메일 받을 주소. 비워 두면 스크립트를 배포한 구글 계정으로 보낸다(공개 저장소에 주소를 적지 않기 위함)
 const NOTIFY = '';
+// 시트 밖(script.google.com)에서 만든 스크립트면 시트 주소의 /d/ 와 /edit 사이 ID를 넣는다. 시트에서 연 스크립트면 비워 둔다
+const SHEET_ID = '';
+const ss_ = () => SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
 
 function sheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = ss_();
   let sh = ss.getSheetByName(SHEET);
   if (!sh) {
     sh = ss.insertSheet(SHEET);
@@ -90,7 +93,7 @@ function notify_(no, slot, name, school, tel, memo) {
     MailApp.sendEmail(to, '[11/28 상담 예약] ' + slot + ' ' + name.replace(/^'/, ''),
       '예약번호: ' + no + '\n시간: 11월 28일(토) ' + slot + '\n학생: ' + name.replace(/^'/, '') +
       '\n학교·학년: ' + school.replace(/^'/, '') + '\n연락처: ' + tel + '\n메모: ' + (memo.replace(/^'/, '') || '-') +
-      '\n\n시트: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
+      '\n\n시트: ' + ss_().getUrl());
   } catch (err) {}
 }
 
