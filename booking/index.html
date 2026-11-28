@@ -132,6 +132,10 @@ form input:focus,form textarea:focus{outline:2px solid var(--blue);border-color:
 const API = "https://script.google.com/macros/s/AKfycbxb1c5Ley4LgloAW98MVHugVrq3D3EokX5Ts9Hev8R2AlPlKKrcTYH8N0zZF_83P_x7/exec";
 const TEL = "010-4189-5644";  // 상담 번호
 const SLOTS = ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30"];
+// 시작 시각이 지난 시간은 마감. 마지막 시간까지 지나면 예약 화면을 닫는다. 시험용: ?now=2026-11-28T11:10
+const NOWQ = new URLSearchParams(location.search).get("now");
+const now = () => NOWQ ? Date.parse(NOWQ + ":00+09:00") : Date.now();
+const past = t => now() >= Date.parse("2026-11-28T" + t + ":00+09:00");
 const MOCK = new URLSearchParams(location.search).has("mock");  // 로컬 시험용: ?mock
 
 const $ = id => document.getElementById(id);
@@ -161,20 +165,28 @@ async function book(data) {
 }
 
 // ---- 시간 버튼 ----
+function ended() {
+  $("hotbadge").hidden = true;
+  $("main").innerHTML = '<div class="card done" style="margin-top:18px"><b style="font-size:18px">11월 28일(토) 진단평가<br>예약이 마감되었습니다</b>'
+    + '<p class="msg" style="margin-top:10px">관심 가져 주셔서 감사합니다.<br>상담은 ' + TEL + ' 또는<br>카카오톡 채널로 문의해 주세요.</p>'
+    + '<a class="home" href="../">상담 안내로 돌아가기</a></div>';
+}
+const closed = t => cap - (counts[t] || 0) <= 0 || past(t);
 function render() {
+  if (SLOTS.every(past)) return ended();
   $("slots").innerHTML = "";
   for (const t of SLOTS) {
     const left = cap - (counts[t] || 0), b = document.createElement("button");
     b.type = "button"; b.className = "slot" + (t === pick ? " on" : "");
-    b.innerHTML = "<b>" + t + "</b><small>" + (left <= 0 ? "마감" : cap > 1 ? "잔여 " + left : "예약 가능") + "</small>";
-    b.disabled = left <= 0;
+    b.innerHTML = "<b>" + t + "</b><small>" + (closed(t) ? "마감" : cap > 1 ? "잔여 " + left : "예약 가능") + "</small>";
+    b.disabled = closed(t);
     b.onclick = () => { pick = t; render(); };
     $("slots").appendChild(b);
   }
-  if (pick && cap - (counts[pick] || 0) <= 0) pick = "";
+  if (pick && closed(pick)) pick = "";
   $("picked").textContent = pick ? "선택한 시간: 11월 28일(토) " + label(pick) : "위에서 시간을 먼저 선택해 주세요";
-  const full = SLOTS.every(t => cap - (counts[t] || 0) <= 0);
-  const used = SLOTS.reduce((a, t) => a + Math.min(counts[t] || 0, cap), 0);
+  const full = SLOTS.every(closed);
+  const used = SLOTS.reduce((a, t) => a + (past(t) ? cap : Math.min(counts[t] || 0, cap)), 0);
   $("hotbadge").hidden = full || used * 2 < SLOTS.length * cap;
   $("slotmsg").textContent = full ? "모든 시간이 마감되었습니다. 다른 날 상담은 " + TEL + "으로 문의해 주세요." : live ? "30분 단위 · 선착순 마감" : "실시간 예약 현황 확인 중…";
   $("slotmsg").className = "msg" + (full ? " err" : "");
@@ -206,6 +218,7 @@ fm.addEventListener("submit", async e => {
   d.name = d.name.trim(); d.school = d.school.trim(); d.memo = (d.memo || "").trim();
   const digits = d.phone.replace(/\D/g, "");
   if (!pick) return err("상담 시간을 선택해 주세요.");
+  if (past(pick)) { pick = ""; render(); return err("선택한 시간이 지나 마감되었습니다. 다른 시간을 선택해 주세요."); }
   if (!d.name) return err("학생 이름을 입력해 주세요.");
   if (!d.school) return err("학교·학년을 입력해 주세요.");
   if (!/^01\d{8,9}$/.test(digits)) return err("학부모 연락처를 정확히 입력해 주세요. (예: 010-1234-5678)");
@@ -233,6 +246,7 @@ $("fm").phone.addEventListener("input", e => {
   e.target.value = v.length < 4 ? v : v.length < 8 ? v.slice(0, 3) + "-" + v.slice(3) : v.slice(0, 3) + "-" + v.slice(3, v.length - 4) + "-" + v.slice(-4);
 });
 load();
+setInterval(() => { if (!$("main").hidden && $("fm") && $("slots").querySelector(".slot:not(.wait)")) render(); }, 30000);
 </script>
 </body>
 </html>

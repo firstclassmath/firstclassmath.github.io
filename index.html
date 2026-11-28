@@ -116,8 +116,8 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
     <div class="tags"><b>신검단중앙역</b><b>초·중·고 수학</b><b>2026. 12. 1 개원</b></div>
   </div>
 
-  <!-- 11/28 상담 예약(손으로 관리). 행사가 끝나면 이 카드를 지울 것 -->
-  <a class="bk" href="booking/">
+  <!-- 11/28 상담 예약. 시간이 다 지나거나 모두 차면 아래 스크립트가 이 카드를 숨긴다 -->
+  <a class="bk" id="bk" href="booking/">
     <div class="top"><span class="day">11/28(토) · 무료</span><span class="dd">선착순 마감</span></div>
     <b class="tt">1:1 진단평가 및 학습컨설팅</b>
     <div class="who"><b>예비고1(현 중3) 중심</b><b>중1~고3 누구나</b></div>
@@ -136,12 +136,16 @@ form.card input:focus,form.card select:focus,form.card textarea:focus{outline:2p
     <a class="post c-hit" href="https://m.blog.naver.com/firstclassmath_2026/224480845331" target="_blank" rel="noopener"><img src="blog/t_hit_ieum.jpg" alt="" loading="lazy"><span class="tx"><small>11/22(일) 공개</small><b>이음고 기말 적중 예상 10문항</b></span><span class="ar">›</span></a>
     <a class="post c-hit" href="https://m.blog.naver.com/firstclassmath_2026/224480850369" target="_blank" rel="noopener"><img src="blog/t_hit_wondang.jpg" alt="" loading="lazy"><span class="tx"><small>11/22(일) 공개</small><b>원당고 기말 적중 예상 10문항</b></span><span class="ar">›</span></a>
   </div>
-  <script>// 11/28 예약 현황: 절반 이상 차면 '마감임박', 다 차면 '예약 마감' (주소는 booking/index.html의 API와 같음)
+  <script>// 11/28 예약 현황: 시작 시각이 지난 시간은 마감으로 센다. 절반 이상 마감이면 '마감임박', 모두 마감이면 카드를 숨긴다 (주소는 booking/index.html의 API와 같음)
+  (function(){var SL=["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30"],q=new URLSearchParams(location.search).get("now"),
+    now=q?Date.parse(q+":00+09:00"):Date.now(),past=function(t){return now>=Date.parse("2026-11-28T"+t+":00+09:00")},
+    card=document.getElementById("bk"),hide=function(){card.remove()};
+  if(SL.every(past))return hide();
   fetch("https://script.google.com/macros/s/AKfycbxb1c5Ley4LgloAW98MVHugVrq3D3EokX5Ts9Hev8R2AlPlKKrcTYH8N0zZF_83P_x7/exec").then(r=>r.json()).then(s=>{
     try{localStorage.setItem("bk_status",JSON.stringify({t:Date.now(),cap:s.cap,counts:s.counts}))}catch(e){}
-    var v=Object.values(s.counts||{}),tot=v.length*s.cap,n=v.reduce((a,c)=>a+Math.min(c,s.cap),0),e=document.getElementById("bk_st");
-    if(!tot)return; if(n>=tot){e.textContent="예약 마감";e.className="end";} else if(n*2>=tot){e.textContent="마감임박";e.className="hot";}
-  }).catch(()=>{});</script>
+    var c=s.counts||{},n=SL.filter(t=>past(t)||(c[t]||0)>=s.cap).length,e=document.getElementById("bk_st");
+    if(n>=SL.length)return hide(); if(n*2>=SL.length){e.textContent="마감임박";e.className="hot";}
+  }).catch(()=>{});})()</script>
   <script>(function(){var d=Math.ceil((new Date(2026,10,22)-new Date().setHours(0,0,0,0))/864e5),e=document.getElementById("hit_dd");
     if(d>0)e.textContent="D-"+d+" · 11/22(일)";else if(d===0)e.textContent="오늘 공개!";else e.textContent="공개 중";})()</script>
 
